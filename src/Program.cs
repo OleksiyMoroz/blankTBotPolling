@@ -1,5 +1,4 @@
-﻿using Telegram.Bot;
-using Telegram.Bot.Services;
+﻿using Telegram.Bot.Services;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
