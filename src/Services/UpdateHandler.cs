@@ -136,7 +136,7 @@ public class UpdateHandler : IUpdateHandler
 
             return await botClient.SendPhotoAsync(
                 chatId: message.Chat.Id,
-                photo: new InputFile(fileStream, fileName),
+                photo: InputFile.FromStream(fileStream, fileName),
                 caption: "Nice Picture",
                 cancellationToken: cancellationToken);
         }
