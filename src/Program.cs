@@ -3,10 +3,6 @@
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
-        // Register Bot configuration
-        services.Configure<BotConfiguration>(
-            context.Configuration.GetSection(BotConfiguration.Configuration));
-
         // Register named HttpClient to benefits from IHttpClientFactory
         // and consume it with ITelegramBotClient typed client.
         // More read:
@@ -15,8 +11,8 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddHttpClient("telegram_bot_client")
                 .AddTypedClient<ITelegramBotClient>((httpClient, sp) =>
                 {
-                    BotConfiguration? botConfig = sp.GetConfiguration<BotConfiguration>();
-                    TelegramBotClientOptions options = new(botConfig.BotToken);
+                    var token = Environment.GetEnvironmentVariable("BOT_TOKEN");
+                    TelegramBotClientOptions options = new(token ?? throw new Exception("BOT_TOKEN is not valid"));
                     return new TelegramBotClient(options, httpClient);
                 });
 
@@ -30,11 +26,3 @@ await host.RunAsync();
 
 #pragma warning disable CA1050 // Declare types in namespaces
 #pragma warning disable RCS1110 // Declare type inside namespace.
-public class BotConfiguration
-#pragma warning restore RCS1110 // Declare type inside namespace.
-#pragma warning restore CA1050 // Declare types in namespaces
-{
-    public static readonly string Configuration = "BotConfiguration";
-
-    public string BotToken { get; set; } = "";
-}
