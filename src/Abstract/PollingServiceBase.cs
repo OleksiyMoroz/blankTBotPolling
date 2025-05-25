@@ -41,7 +41,9 @@ public abstract class PollingServiceBase<TReceiverService> : BackgroundService
                 using var scope = _serviceProvider.CreateScope();
                 var receiver = scope.ServiceProvider.GetRequiredService<TReceiverService>();
 
-                await receiver.ReceiveAsync(stoppingToken);
+                Console.WriteLine("Bot is started");
+
+                await receiver.ReceiveAsync(stoppingToken);          
             }
             // Update Handler only captures exception inside update polling loop
             // We'll catch all other exceptions here
