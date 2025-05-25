@@ -1,32 +1,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace src.Models
 {
     public class Team
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("abbreviation")]
+        [JsonPropertyName("abbreviation")]
         public string? Abbreviation { get; set; }
 
-        [JsonProperty("city")]
+        [JsonPropertyName("city")]
         public string? City { get; set; }
 
-        [JsonProperty("conference")]
+        [JsonPropertyName("conference")]
         public string? Conference { get; set; }
 
-        [JsonProperty("division")]
+        [JsonPropertyName("division")]
         public string? Division { get; set; }
 
-        [JsonProperty("full_name")]
+        [JsonPropertyName("full_name")]
         public string? FullName { get; set; }
         
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string? Name { get; set; }
     }
 }

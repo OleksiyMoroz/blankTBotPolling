@@ -1,4 +1,5 @@
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using src.Models;
 
 namespace src.Services
@@ -6,43 +7,43 @@ namespace src.Services
     public class ParseService
     {
         public List<Player> DataToPlayers(string raw) {
-            var parsed = JsonConvert.DeserializeObject<DataPlayers>(raw);
+            var parsed = JsonSerializer.Deserialize<DataPlayers>(raw);
             return parsed?.Players ?? default!;
         }
 
         public Player DataToPlayer(string raw) {
-            var parsed = JsonConvert.DeserializeObject<Player>(raw);
+            var parsed = JsonSerializer.Deserialize<Player>(raw);
             return parsed ?? default!;
         }
 
         public Team DataToTeam(string raw) {
-            var parsed = JsonConvert.DeserializeObject<Team>(raw);
+            var parsed = JsonSerializer.Deserialize<Team>(raw);
             return parsed ?? default!;
         }
 
         public List<Game> DataToGames(string raw) {
-            var parsed = JsonConvert.DeserializeObject<DataGames>(raw);
+            var parsed = JsonSerializer.Deserialize<DataGames>(raw);
             return parsed?.Games ?? default!;
         }
 
         public List<Stats> DataToStats(string raw) {
-            var parsed = JsonConvert.DeserializeObject<DataStats>(raw);
+            var parsed = JsonSerializer.Deserialize<DataStats>(raw);
             return parsed?.Stats ?? default!;
         }
     }
 
     public class DataPlayers {
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public List<Player> Players { get; set; }
     }
 
     public class DataGames {
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public List<Game> Games { get; set; }
     }
 
     public class DataStats {
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public List<Stats> Stats { get; set; }
     }
 }

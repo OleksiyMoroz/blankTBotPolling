@@ -98,4 +98,10 @@ public class UpdateHandler : IUpdateHandler
         if (exception is RequestException)
             await Task.Delay(TimeSpan.FromSeconds(2), cancellationToken);
     }
+
+    public Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, HandleErrorSource source, CancellationToken cancellationToken)
+    {
+        _logger.LogCritical("Error: {ErrorMessage}", exception.Message);
+        return Task.CompletedTask;
+    }
 }

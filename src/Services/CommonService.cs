@@ -11,18 +11,18 @@ namespace src.Services
 {
     public class CommonService
     {
-        public async Task SendTextMessageAsync(long chatId, string text, ITelegramBotClient client, IReplyMarkup replyMarkup = null)
+        public async Task SendTextMessageAsync(long chatId, string text, ITelegramBotClient client, ReplyMarkup replyMarkup = null)
         {
             if (text.Length > 4096)
             {
                 for (int i = 0; i < text.Length / 4096; i++)
                 {
                     string chunk = text.Substring(i * 4096, 4096);
-                    await  client.SendTextMessageAsync(chatId, chunk, replyMarkup: replyMarkup, parseMode: ParseMode.Html);
+                    await  client.SendMessage(chatId, chunk, replyMarkup: replyMarkup, parseMode: ParseMode.Html);
                 }
             }
             else
-                await client.SendTextMessageAsync(chatId, text, replyMarkup: replyMarkup, parseMode: ParseMode.Html);
+                await client.SendMessage(chatId, text, replyMarkup: replyMarkup, parseMode: ParseMode.Html);
         }
 
         public string GetFormattedPlayers(List<Player> players) {

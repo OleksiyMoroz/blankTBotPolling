@@ -1,43 +1,43 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace src.Models
 {
     public class Game
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
-        [JsonProperty("date")]
+        [JsonPropertyName("date")]
         public DateTime Date { get; set; }
 
-        [JsonProperty("home_team")]
+        [JsonPropertyName("home_team")]
         public Team HomeTeam { get; set; }
 
-        [JsonProperty("home_team_score")]
+        [JsonPropertyName("home_team_score")]
         public double HomeTeamScore { get; set; }
 
-        [JsonProperty("period")]
+        [JsonPropertyName("period")]
         public double Period { get; set; }
 
-        [JsonProperty("postseason")]
+        [JsonPropertyName("postseason")]
         public bool Postseason { get; set; }
 
-        [JsonProperty("season")]
+        [JsonPropertyName("season")]
         public int Season { get; set; }
 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; set; }
 
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         public string? Time { get; set; }
 
-        [JsonProperty("visitor_team")]
+        [JsonPropertyName("visitor_team")]
         public Team VisitorTeam { get; set; }
 
-        [JsonProperty("visitor_team_score")]
+        [JsonPropertyName("visitor_team_score")]
         public double VisitorTeamScore { get; set; }
     }
 }

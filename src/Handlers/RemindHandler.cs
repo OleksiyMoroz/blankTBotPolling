@@ -34,13 +34,13 @@ namespace src.Handlers
         _context = context;
 
     }
-        public async ValueTask BotOnMessageReceived(string text, long chatId, ITelegramBotClient client)
+        public async Task BotOnMessageReceived(string text, long chatId, ITelegramBotClient client)
         {
             await OnRemindSave(text, chatId, client);
             await OnAddRemind(text, chatId, client);
         }
 
-        private async ValueTask OnAddRemind(string text, long chatId, ITelegramBotClient client) {
+        private async Task OnAddRemind(string text, long chatId, ITelegramBotClient client) {
             if(text != Commands.Reminder) return;
 
             await _commonService.SendTextMessageAsync(chatId, "Please enter the game details and reminder date and time in the following format:\n" +
@@ -50,7 +50,7 @@ namespace src.Handlers
             usr.Step = Actions.TypindRemind;
         }
 
-        private async ValueTask OnRemindSave(string text, long chatId, ITelegramBotClient client) {
+        private async Task OnRemindSave(string text, long chatId, ITelegramBotClient client) {
             var usr = _usersStateService.GetUser(chatId);
             if(usr.Step != Actions.TypindRemind) return;
 
